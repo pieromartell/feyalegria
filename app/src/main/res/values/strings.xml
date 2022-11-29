@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FeyAlegria</string>
+    <string name="valtxcodigo">Ingrese el Código de Docente</string>
+    <string name="valtxcontrasena">Ingrese su Contraseña </string>
+    <string name="valbtningreso">Ingrese</string>
+    <string name="valtxolvidocontrasena">¿Olvido su contraseña?</string>
+</resources>

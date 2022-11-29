@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Este arcrhivo xml se creo para definir como se debe de ver la pantalla de carga-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@color/white"/>
+    <item
+        android:drawable="@mipmap/ic_launcher"
+        android:gravity="center"/>
+
+</layer-list>

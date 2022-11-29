@@ -96,10 +96,11 @@
 
     <Button
         android:id="@+id/btnEnviar"
-        android:layout_width="245dp"
-        android:layout_height="56dp"
+        android:layout_width="238dp"
+        android:layout_height="49dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="#EFD706"
+        android:drawablePadding="5sp"
         android:text="@string/valtbtnEnviar"
         android:textColor="#F44336"
         app:layout_constraintEnd_toEndOf="parent"

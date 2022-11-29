@@ -4,4 +4,10 @@
     <string name="valtxcontrasena">Ingrese su Contraseña </string>
     <string name="valbtningreso">Ingrese</string>
     <string name="valtxolvidocontrasena">¿Olvido su contraseña?</string>
+    <string name="valTitulo">Justificación</string>
+    <string name="valTipoFalta">Tipo de Falta</string>
+    <string name="valResultTipoFalta">example</string>
+    <string name="valFechaFalta">Fecha de Falta</string>
+    <string name="valDescripcion">Descripción</string>
+    <string name="valAsusnto">Asunto</string>
 </resources>

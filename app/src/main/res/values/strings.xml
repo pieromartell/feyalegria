@@ -10,4 +10,6 @@
     <string name="valFechaFalta">Fecha de Falta</string>
     <string name="valDescripcion">Descripción</string>
     <string name="valAsusnto">Asunto</string>
+    <string name="valtbtnEnviar">Enviar</string>
+    <string name="valbtnMenu">Volver al Menu</string>
 </resources>

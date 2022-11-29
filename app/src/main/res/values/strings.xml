@@ -12,4 +12,9 @@
     <string name="valAsusnto">Asunto</string>
     <string name="valtbtnEnviar">Enviar</string>
     <string name="valbtnMenu">Volver al Menu</string>
+    <string name="valSaludo">Bienvenido Docente</string>
+    <string name="valbtnhorarios">Ver Horarios</string>
+    <string name="valbtnTardInasis">VER TARDANZAS E INASISTENCIAS</string>
+    <string name="valMarcar">Marcar Asistencia</string>
+    <string name="valCerrarSesion">Cerrar Sesión</string>
 </resources>

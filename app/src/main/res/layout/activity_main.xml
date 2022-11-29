@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#9F0F0F"
     tools:context=".MainActivity">
 
     <EditText
@@ -66,6 +67,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="20dp"
+        android:background="#EFD706"
         android:text="Ingreso"
         android:textColor="@color/design_default_color_primary_dark"
         app:layout_constraintEnd_toEndOf="parent"

@@ -38,11 +38,13 @@
         android:id="@+id/txtfechah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="66dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvhorario"

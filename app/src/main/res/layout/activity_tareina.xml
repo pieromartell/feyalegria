@@ -70,7 +70,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvtardanzas" />
+        app:layout_constraintTop_toBottomOf="@+id/rvtardanzas"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/textView5"
@@ -97,12 +98,13 @@
     <Button
         android:id="@+id/btninasistencia"
         android:layout_width="350dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="30dp"
         android:background="#EFD706"
         android:text="Justificar Inasistencia"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -112,7 +114,7 @@
     <Button
         android:id="@+id/btnmenu"
         android:layout_width="356dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="30dp"

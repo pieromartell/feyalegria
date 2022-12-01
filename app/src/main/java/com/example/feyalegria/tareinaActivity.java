@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.feyalegria.databinding.ActivityMainBinding;
 import com.example.feyalegria.databinding.ActivityTareinaBinding;
@@ -35,11 +36,14 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
 
     public void irjustificacontar(){
         Intent intentjustificaciontar = new Intent(this,JustificacionActivity.class);
+        intentjustificaciontar.putExtra("info","Tardanza");
         startActivity(intentjustificaciontar);
+
     }
 
     public void irjustificaconIna(){
         Intent intentjustificacionina = new Intent(this,JustificacionActivity.class);
+        intentjustificacionina.putExtra("info2","Inasistencia");
         startActivity(intentjustificacionina);
     }
     private void iraMenu(){

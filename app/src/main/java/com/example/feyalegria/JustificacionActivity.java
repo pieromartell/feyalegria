@@ -16,6 +16,14 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
         binding = ActivityJustificacionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.btnMenu2.setOnClickListener(this);
+        Bundle bundle = getIntent().getExtras();
+        String dato = bundle.getString("info");
+        binding.tvTipoFalta.setText(dato);
+        String dato2 = bundle.getString("info2");
+        binding.tvTipoFalta.setText(dato2);
+
+
+
     }
 
     @Override

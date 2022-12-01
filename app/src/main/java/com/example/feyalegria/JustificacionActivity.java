@@ -20,7 +20,7 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
         String dato = bundle.getString("info");
         binding.tvTipoFalta.setText(dato);
         String dato2 = bundle.getString("info2");
-        binding.tvTipoFalta.setText(dato2);
+        binding.tvtipofalta2.setText(dato2);
 
 
 
@@ -34,6 +34,11 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
         }
 
     }
+    private void borrardatos(){
+        binding.tvAsunto.setText("");
+        binding.tvDescripcion.setText("");
+    }
+
     private void iraMenus(){
         Intent intentMenus = new Intent(this,MenuActivity.class);
         startActivity(intentMenus);

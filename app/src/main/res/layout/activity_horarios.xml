@@ -64,8 +64,10 @@
         android:layout_marginEnd="30dp"
         android:background="#EFD706"
         android:text="Volver al Menú"
+        android:textColor="#757575"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvhorario" />
+        app:layout_constraintTop_toBottomOf="@+id/rvhorario"
+        tools:ignore="TextContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

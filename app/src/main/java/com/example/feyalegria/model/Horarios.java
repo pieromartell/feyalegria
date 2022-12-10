@@ -7,6 +7,13 @@ public class Horarios {
     public String hora_inicio;
     public String hora_fin;
 
+    public Horarios(Integer idhorario, String nombcurso, String nomaula, String hora_inicio, String hora_fin) {
+        this.idhorario = idhorario;
+        this.nombcurso = nombcurso;
+        this.nomaula = nomaula;
+        this.hora_inicio = hora_inicio;
+        this.hora_fin = hora_fin;
+    }
 
     public Integer getIdhorario() {
         return idhorario;

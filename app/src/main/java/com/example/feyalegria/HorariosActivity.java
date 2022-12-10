@@ -1,35 +1,38 @@
 package com.example.feyalegria;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
-import com.example.feyalegria.api.AndroidapiService;
+import com.example.feyalegria.adapter.horarioAdapter;
 import com.example.feyalegria.databinding.ActivityHorariosBinding;
-import com.example.feyalegria.databinding.ActivityMainBinding;
-import com.example.feyalegria.databinding.HorariosCardBinding;
-import com.example.feyalegria.model.HorarioRespuesta;
 import com.example.feyalegria.model.Horarios;
+import com.example.feyalegria.retroit.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HorariosActivity extends AppCompatActivity implements View.OnClickListener {
     private Retrofit retrofit;
-private static  final String TAG="HORARIO";
+    private static String TAG = "Horarios";
     private ActivityHorariosBinding binding;
+    horarioAdapter adapter;
+    LinearLayoutManager layoutManager;
+    RecyclerView recyclerView;
 
-    private RecyclerView recyclerView;
-    private ListaHorarioAdapter listaHorarioAdapter;
+    List<Horarios> listahorarios = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,44 +40,38 @@ private static  final String TAG="HORARIO";
         binding = ActivityHorariosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.btnvolver.setOnClickListener(this);
+        //Agregados para realizar el get
+        recyclerView = binding.rvhorarios;
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter =  new horarioAdapter(listahorarios);
+        recyclerView.setAdapter(adapter);
+        fetchhorario();
 
-        setContentView(R.layout.activity_horarios);
-    recyclerView=(RecyclerView) findViewById(R.id.rvhorario);
-    listaHorarioAdapter=new ListaHorarioAdapter();
-    recyclerView.setAdapter(listaHorarioAdapter);
-    recyclerView.setHasFixedSize(true);
 
 
-    retrofit=new Retrofit.Builder()
-            .baseUrl("http://192.168.86.1:3000/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    obtenerDatos();
     }
-
-    private void obtenerDatos(){
-        AndroidapiService service=retrofit.create(AndroidapiService.class);
-        Call <HorarioRespuesta> horarioRespuestaCall =service.obtenerListaHorarios();
-        horarioRespuestaCall.enqueue(new Callback<HorarioRespuesta>() {
+    private void fetchhorario(){
+        RetrofitClient.getRetrofitCliente().obtenerListaHorarios().enqueue(new Callback<List<Horarios>>() {
             @Override
-            public void onResponse(Call<HorarioRespuesta> call, Response<HorarioRespuesta> response) {
-                if(response.isSuccessful()){
-                    HorarioRespuesta horarioRespuesta=response.body();
-                    ArrayList<Horarios> listaHorarios=horarioRespuesta.getResults();
-                        listaHorarioAdapter.adicionarListaHorario(listaHorarios);
+            public void onResponse(Call<List<Horarios>> call, Response<List<Horarios>> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    listahorarios.addAll(response.body());
+                    adapter.notifyDataSetChanged();
+                    Log.e(TAG," TODO BIEN : "+response.body());
 
                 }else{
-                    Log.e(TAG,"onResponse"+response.errorBody());
+                    Log.e(TAG," OnResponse: "+response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<HorarioRespuesta> call, Throwable t) {
-                Log.e(TAG,"onFailure"+t.getMessage());
-
+            public void onFailure(Call<List<Horarios>> call, Throwable t) {
+                Toast.makeText(HorariosActivity.this, "Error: " +t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     @Override
     public void onClick(View view) {

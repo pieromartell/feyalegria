@@ -12,17 +12,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cvtardanzas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="394dp"
+        android:layout_height="102dp">
 
         <TextView
             android:id="@+id/txtfecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="104dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView10"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +31,7 @@
             android:id="@+id/txthora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="72dp"
+            android:layout_marginTop="68dp"
             android:layout_marginEnd="100dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,12 +55,12 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:text="Hora de Llegada:"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
-            tools:layout_editor_absoluteX="49dp" />
+            tools:layout_editor_absoluteX="48dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

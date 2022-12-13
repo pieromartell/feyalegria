@@ -15,6 +15,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".JustifiTarActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MenuActivity"
             android:exported="false">
             <meta-data
@@ -41,9 +48,7 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
-
-        <!-- Lineas necesarias para Retrofit: android:usesCleartextTraffic="true" -->
+        </activity> <!-- Lineas necesarias para Retrofit: android:usesCleartextTraffic="true" -->
         <!-- Se agrega la siguiente: android:screenOrientation="portrait" para evitar que se rote la pantalla -->
         <activity
             android:name=".MainActivity"

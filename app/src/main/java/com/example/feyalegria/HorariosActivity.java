@@ -24,7 +24,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class HorariosActivity extends AppCompatActivity implements View.OnClickListener {
-    private Retrofit retrofit;
     private static String TAG = "Horarios";
     private ActivityHorariosBinding binding;
     horarioAdapter adapter;

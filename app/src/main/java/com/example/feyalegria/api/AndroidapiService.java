@@ -3,6 +3,7 @@ package com.example.feyalegria.api;
 import com.example.feyalegria.model.Horarios;
 import com.example.feyalegria.model.Inasistencia;
 import com.example.feyalegria.model.Tardanza;
+import com.example.feyalegria.model.asistencia;
 
 import java.util.List;
 
@@ -24,6 +25,8 @@ public interface AndroidapiService {
     Call<List<Inasistencia>> obtenerListaInasistencia();
 
     //Interface GET para el Item_Lista
+    @GET("vasistencia")
+    Call<List<asistencia>> obtnerListarAsistencia();
 
 
 }

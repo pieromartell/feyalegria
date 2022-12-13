@@ -17,4 +17,5 @@
     <string name="valbtnTardInasis">VER TARDANZAS E INASISTENCIAS</string>
     <string name="valMarcar">Marcar Asistencia</string>
     <string name="valCerrarSesion">Cerrar Sesión</string>
+    <string name="valtxtAsistencias">Ver Asistencias</string>
 </resources>

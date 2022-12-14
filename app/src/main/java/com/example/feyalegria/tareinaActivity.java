@@ -28,6 +28,9 @@ import retrofit2.Response;
 
 public class tareinaActivity extends AppCompatActivity implements View.OnClickListener{
 
+    //Parametro para pasar el nombre de los usuarios
+    Bundle parametros;
+
     private static String TAGI ="INASISTENCIA";
     private static String TAGT ="TARDANZA";
     private ActivityTareinaBinding binding;
@@ -68,6 +71,14 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
         Inasistenciaadapter = new InasistenciaAdapter(listainasis);
         recyclerView.setAdapter(Inasistenciaadapter);
         FetchInasisten();
+
+        //Mandar el Nombre de Usuario a la vista
+        String usuario;
+        parametros = this.getIntent().getExtras();
+        if(parametros != null) {
+            usuario = parametros.getString("usuario");
+            binding.txtdocente.setText(usuario.toUpperCase());}
+
     }
 
     //Metodo para Enviar las Tardanzas
@@ -139,6 +150,7 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
     }
     private void iraMenu(){
         Intent intentMenu = new Intent(this,MenuActivity.class);
+        intentMenu.putExtras(parametros);
         startActivity(intentMenu);
     }
 }

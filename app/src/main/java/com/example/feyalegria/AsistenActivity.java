@@ -26,6 +26,9 @@ public class AsistenActivity extends AppCompatActivity implements View.OnClickLi
 
     private ActivityAsistenBinding binding;
 
+    //Parametro para pasar el nombre de los usuarios
+    Bundle parametros;
+
     //Elemento necesario para obtener la asistencia
     private static String TAG = "ASISTENCIA";
     asistenciaAdapter asistenciaAdapter;
@@ -46,6 +49,14 @@ public class AsistenActivity extends AppCompatActivity implements View.OnClickLi
         asistenciaAdapter =  new asistenciaAdapter(listaasistencia);
         recyclerView.setAdapter(asistenciaAdapter);
         fechtAsistencia();
+
+        //Mandar el Nombre de Usuario a la vista
+        String usuario;
+        parametros = this.getIntent().getExtras();
+        if(parametros != null) {
+            usuario = parametros.getString("usuario");
+            binding.txtdocenteh.setText(usuario.toUpperCase());}
+
     }
 
     //Metodo para devolver la Asistencia
@@ -80,6 +91,7 @@ public class AsistenActivity extends AppCompatActivity implements View.OnClickLi
 
     private void iraMenuA(){
         Intent intentMenu = new Intent(this,MenuActivity.class);
+        intentMenu.putExtras(parametros);
         startActivity(intentMenu);
     }
 }

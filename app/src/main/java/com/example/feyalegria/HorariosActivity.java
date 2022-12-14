@@ -56,6 +56,7 @@ public class HorariosActivity extends AppCompatActivity implements View.OnClickL
             binding.txtdocenteh.setText(usuario.toUpperCase());}
 
     }
+    //Metodo para Mostrar los Horarios
     private void fetchhorario(){
         RetrofitClient.getRetrofitCliente().obtenerListaHorarios().enqueue(new Callback<List<Horarios>>() {
             @Override

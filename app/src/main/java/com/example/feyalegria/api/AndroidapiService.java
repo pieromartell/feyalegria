@@ -2,13 +2,17 @@ package com.example.feyalegria.api;
 
 import com.example.feyalegria.model.Horarios;
 import com.example.feyalegria.model.Inasistencia;
+import com.example.feyalegria.model.RequestLogin;
+import com.example.feyalegria.model.ResponseLogin;
 import com.example.feyalegria.model.Tardanza;
 import com.example.feyalegria.model.asistencia;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface AndroidapiService {
 
@@ -28,5 +32,6 @@ public interface AndroidapiService {
     @GET("vasistencia")
     Call<List<asistencia>> obtnerListarAsistencia();
 
-
+    @POST("login")
+    public Call<ResponseLogin> login(@Body RequestLogin requestLogin);
 }

@@ -13,7 +13,7 @@ public class CargaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Aqui se infica que primero carge la Mainactivity
-        Intent intent = new Intent(this,tareinaActivity.class);
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
         finish();
     }

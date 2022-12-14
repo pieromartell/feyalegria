@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.feyalegria.databinding.ActivityMainBinding;
 import com.example.feyalegria.model.Horarios;
+import com.example.feyalegria.model.RequestLogin;
 import com.example.feyalegria.model.ResponseLogin;
 import com.example.feyalegria.viewmodel.AuthViewModel;
 
@@ -22,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, Callback<ArrayList<Horarios>> {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Retrofit retrofit;
     private AuthViewModel authViewModel;
@@ -30,12 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*
-        super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        binding.btningresar.setOnClickListener(this);
-        */
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -52,9 +47,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void validarAutenticacion(ResponseLogin responseLogin) {
-        if(responseLogin.getIdusua() > 0){
-            startActivity(new Intent(MainActivity.this,
-                    MenuActivity.class));
+        if(responseLogin != null){
+            iraMenu(responseLogin);
+            Toast.makeText(this, "Bienvenido: "+responseLogin.getUsuario().toString().toUpperCase(),
+                    Toast.LENGTH_LONG).show();
         }else{
             Toast.makeText(this, "Usuario no encontrado.",
                     Toast.LENGTH_LONG).show();
@@ -62,28 +58,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onResponse(Call<ArrayList<Horarios>> call, Response<ArrayList<Horarios>> response) {
-        if(response.isSuccessful()){
-            ArrayList<Horarios> horarios= response.body();
-            Log.d("onResponse horarios","size  of horarios=)>"+horarios.size());
-        }
-    }
-
-    @Override
-    public void onFailure(Call<ArrayList<Horarios>> call, Throwable t) {
-
-    }
-
-    @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btningresar: iraMenu();
-                break;
-        }
+        autenticarUsuario();
     }
 
-    private void iraMenu(){
+    public void autenticarUsuario(){
+        RequestLogin requestLogin = new RequestLogin();
+        requestLogin.setUsuario(binding.txtcodigo.getText().toString());
+        requestLogin.setContrasena(binding.txtcontrasena.getText().toString());
+        authViewModel.autenticarUsuario(requestLogin);
+    }
+
+    private void iraMenu(ResponseLogin responseLogin){
         Intent intentMenu = new Intent(this,MenuActivity.class);
+        intentMenu.putExtra("idusua", responseLogin.getIdusua());
+        intentMenu.putExtra("iddocente", responseLogin.getIddocente());
+        intentMenu.putExtra("usuario", responseLogin.getUsuario());
+        intentMenu.putExtra("contrasena", responseLogin.getContrasena());
+        intentMenu.putExtra("estado", responseLogin.getEstado());
         startActivity(intentMenu);
     }
 

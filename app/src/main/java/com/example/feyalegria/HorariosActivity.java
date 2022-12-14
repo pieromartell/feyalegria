@@ -29,6 +29,8 @@ public class HorariosActivity extends AppCompatActivity implements View.OnClickL
     horarioAdapter adapter;
     LinearLayoutManager layoutManager;
     RecyclerView recyclerView;
+    Bundle parametros;
+
 
     List<Horarios> listahorarios = new ArrayList<>();
 
@@ -47,7 +49,11 @@ public class HorariosActivity extends AppCompatActivity implements View.OnClickL
         recyclerView.setAdapter(adapter);
         fetchhorario();
 
-
+        String usuario;
+        parametros = this.getIntent().getExtras();
+        if(parametros != null) {
+            usuario = parametros.getString("usuario");
+            binding.txtdocenteh.setText(usuario.toUpperCase());}
 
     }
     private void fetchhorario(){
@@ -81,6 +87,7 @@ public class HorariosActivity extends AppCompatActivity implements View.OnClickL
     }
     private void iraMenu(){
         Intent intentMenu = new Intent(this,MenuActivity.class);
+        intentMenu.putExtras(parametros);
         startActivity(intentMenu);
     }
 }

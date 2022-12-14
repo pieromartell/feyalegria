@@ -17,10 +17,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         binding =  ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //Configuracion de Botnos
+        binding.btnTardInasis.setOnClickListener(this);
         binding.btnHorarios.setOnClickListener(this);
+        binding.btnAsistencias.setOnClickListener(this);
         binding.btnMarcarAsis.setOnClickListener(this);
         binding.btnCerrarSesion.setOnClickListener(this);
-        binding.btnTardInasis.setOnClickListener(this);
 
 
     }
@@ -34,8 +36,11 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnTardInasis: idatardanzas();
                 break;
+            case R.id.btnAsistencias: irAsistencias();
+                break;
         }
     }
+    //Metodos para llamar a las Actividades
 
     private void idatardanzas(){
         Intent intenttardan =  new Intent(this,tareinaActivity.class);
@@ -47,9 +52,17 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intenthorario);
     }
 
+    private void irAsistencias(){
+        Intent intentasis =  new Intent(this, AsistenActivity.class);
+        startActivity(intentasis);
+    }
+
     private void iraCerrarsion(){
         Intent intentmain =  new Intent(this, MainActivity.class);
         startActivity(intentmain);
     }
+
+
+
 
 }

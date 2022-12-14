@@ -40,7 +40,7 @@ public class HorariosActivity extends AppCompatActivity implements View.OnClickL
         setContentView(binding.getRoot());
         binding.btnvolver.setOnClickListener(this);
         //Agregados para realizar el get
-        recyclerView = binding.rvhorarios;
+        recyclerView = binding.rvhorario;
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         adapter =  new horarioAdapter(listahorarios);

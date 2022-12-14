@@ -31,8 +31,8 @@ public class asistenciaAdapter extends RecyclerView.Adapter<asistenciaAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull asistenciaAdapter.ViewHolder holder, int position) {
-        holder.binding.txtfechaa.setText(listaasistencia.get(position).getFecha().substring(10));
-        holder.binding.txthoraa.setText(listaasistencia.get(position).getFecha().substring(11,19));
+        holder.binding.txtfechaa.setText(listaasistencia.get(position).getFh_asistencia().substring(0,10));
+        holder.binding.txthoraa.setText(listaasistencia.get(position).getFh_asistencia().substring(11,19));
     }
 
     @Override

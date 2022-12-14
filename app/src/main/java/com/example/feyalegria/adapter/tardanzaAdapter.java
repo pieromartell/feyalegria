@@ -35,7 +35,7 @@ public class tardanzaAdapter extends RecyclerView.Adapter<tardanzaAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull tardanzaAdapter.ViewHolder holder, int position) {
         holder.binding.txtfecha.setText(listaTardanza.get(position).getFh_asistencia().substring(0,10));
-        holder.binding.txtfecha2.setText(listaTardanza.get(position).getFh_asistencia().substring(11,19));
+        holder.binding.txthora.setText(listaTardanza.get(position).getFh_asistencia().substring(11,19));
         /*
        Intent intent = new Intent(holder.itemView.getContext(), JustificacionActivity.class);
         intent.putExtra(Intent.EXTRA_TEXT,listaTardanza.get(position).getHora_inicio() +" - "+ listaTardanza.get(position).getHora_fin());

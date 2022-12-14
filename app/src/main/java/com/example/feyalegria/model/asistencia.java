@@ -1,17 +1,17 @@
 package com.example.feyalegria.model;
 
 public class asistencia {
-    private String fecha;
+    private String fh_asistencia;
 
-    public asistencia(String fecha) {
-        this.fecha = fecha;
+    public asistencia(String fh_asistencia) {
+        this.fh_asistencia = fh_asistencia;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getFh_asistencia() {
+        return fh_asistencia;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFh_asistencia(String fh_asistencia) {
+        this.fh_asistencia = fh_asistencia;
     }
 }

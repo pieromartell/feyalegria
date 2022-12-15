@@ -24,6 +24,8 @@ import retrofit2.Response;
 
 public class JustificacionActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityJustificacionBinding binding;
+    Bundle parametros;
+    public int iddocente;
     private Spinner spinner;
     private String TAG = "Justificar Inasistencia";
     ArrayAdapter<String> adapter;
@@ -41,17 +43,27 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
         binding.tvtipofalta2.setText(dato2);
         //Configuracion del Spinner
         spinner = binding.spFechaFalta;
-        adapter =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listtardan);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listtardan);
         androidapiService = RetrofitparaSpinners.getConnection().create(AndroidapiService.class);
-        //cargardatosINA();
+        String nom;
+        parametros = this.getIntent().getExtras();
+        if (parametros != null) {
+            nom = parametros.getString("usuario");
+        }
 
-
+        //Configuracion de Parametros
+        parametros = this.getIntent().getExtras();
+        if(parametros != null){
+            iddocente = parametros.getInt("iddocente");
+        }
+        cargardatosINA(iddocente);
 
     }
 
-    /*
-    private void cargardatosINA() {
-        Call<List<Inasistencia>> call =  androidapiService.obtenerListaInasistencia();
+
+
+    private void cargardatosINA(int iddocente) {
+        Call<List<Inasistencia>> call =  androidapiService.obtenerListaInasistencia(iddocente);
         call.enqueue(new Callback<List<Inasistencia>>() {
             @Override
             public void onResponse(Call<List<Inasistencia>> call, Response<List<Inasistencia>> response) {
@@ -64,6 +76,7 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
                     adapter.notifyDataSetChanged();
                     Log.e(TAG,"  TODO BIEN "+ response.body());
                 }else{
+                    
                     Log.e(TAG, " OnResponse "+response.body());
                 }
             }
@@ -75,7 +88,7 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
         });
     }
 
-     */
+
 
     @Override
     public void onClick(View view) {
@@ -94,6 +107,7 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
 
     private void iraMenus(){
         Intent intentMenus = new Intent(this,MenuActivity.class);
+        intentMenus.putExtras(parametros);
         startActivity(intentMenus);
     }
     private void Enviar(){

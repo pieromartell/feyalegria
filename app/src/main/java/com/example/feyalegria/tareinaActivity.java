@@ -31,7 +31,7 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
 
     //Parametro para pasar el nombre de los usuarios
     Bundle parametros;
-    public int IDDoncente;
+    public int iddocente;
 
     private static String TAGI ="INASISTENCIA";
     private static String TAGT ="TARDANZA";
@@ -82,10 +82,10 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
         //Configuracion de Parametros
         parametros = this.getIntent().getExtras();
         if(parametros != null){
-            IDDoncente = parametros.getInt("iddocente");
+            iddocente = parametros.getInt("iddocente");
         }
-        Tardanza(IDDoncente);
-        InasistenciaMETODO(IDDoncente);
+        Tardanza(iddocente);
+        InasistenciaMETODO(iddocente);
 
     }
 

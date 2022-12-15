@@ -29,6 +29,7 @@ import retrofit2.Response;
 public class JustifiTarActivity extends AppCompatActivity implements View.OnClickListener  {
 
     Bundle parametros;
+    public int iddocente;
     ActivityJustifiTarBinding binding;
     Spinner spinner;
     private String TAG = "Justificar Tardanza";
@@ -49,44 +50,53 @@ public class JustifiTarActivity extends AppCompatActivity implements View.OnClic
 
         //Configuracion del Spinner
         spinner = binding.spFechaFalta;
-        adapter =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listtardan);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listtardan);
         androidapiService = RetrofitparaSpinners.getConnection().create(AndroidapiService.class);
-        //cargaData();
+
         String nom;
         parametros = this.getIntent().getExtras();
-        if(parametros != null) {
+        if (parametros != null) {
             nom = parametros.getString("usuario");
+        }
+
+        //Configuracion de Parametros
+        parametros = this.getIntent().getExtras();
+        if(parametros != null){
+            iddocente = parametros.getInt("iddocente");
+        }
+        CargarDatosen(iddocente);
+
     }
-    /*
-    //Metodo para Cargar los Datos con tardanza
-    public void cargaData(){
-        Call<List<Tardanza>> call = androidapiService.obtenerListaTardanza();
+
+    private void CargarDatosen(int iddocente) {
+        Call<List<Tardanza>> call = RetrofitClient.getRetrofitCliente().obtenerListaTardanza(iddocente);
         call.enqueue(new Callback<List<Tardanza>>() {
             @Override
             public void onResponse(Call<List<Tardanza>> call, Response<List<Tardanza>> response) {
-                if(response.isSuccessful() && response.body() !=null){
-                    for (Tardanza tar: response.body()){
-
-                        listtardan.add(tar.getFh_asistencia().substring(0,10)+" - "+tar.getFh_asistencia().substring(11,19));
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinner.setAdapter(adapter);
+                try {
+                    if(response.isSuccessful() && response.body() != null){
+                        for (Tardanza tar: response.body()){
+                            listtardan.add(tar.getFh_asistencia().substring(0,10) +" - "+ tar.getFh_asistencia().substring(11,19));
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinner.setAdapter(adapter);
+                        }
+                        adapter.notifyDataSetChanged();
+                        Log.e(TAG, " TODO BIEN EN JUSTIFICAR TARDANZA: " + response.body());
+                    }else{
+                        Log.e(TAG, " TODO UN POCO MAL EN JUSTIFICAR TARDANZA: " + response.body());
                     }
-                    adapter.notifyDataSetChanged();
-                    Log.e(TAG," TODO BIEN: " + response.body());
-                }else{
-                    Log.e(TAG," OnResponse: " + response.body());
+
+                }catch (Exception e){
+                    Log.e(TAG, " TODO MAL EN JUSTIFICAR TARDANZA: " + response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Tardanza>> call, Throwable t) {
-                Toast.makeText(JustifiTarActivity.this, "Error: ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(JustifiTarActivity.this, "MALISIMO: ", Toast.LENGTH_SHORT).show();
             }
         });
-*/
     }
-
-
 
 
     @Override

@@ -28,7 +28,7 @@ public class AsistenActivity extends AppCompatActivity implements View.OnClickLi
 
     //Parametro para pasar el nombre de los usuarios
     Bundle parametros;
-    public int IDDoncente;
+    public int iddocente;
 
     //Elemento necesario para obtener la asistencia
     private static String TAG = "ASISTENCIA";
@@ -49,7 +49,6 @@ public class AsistenActivity extends AppCompatActivity implements View.OnClickLi
         recyclerView.setLayoutManager(layoutManager);
         asistenciaAdapter =  new asistenciaAdapter(listaasistencia);
         recyclerView.setAdapter(asistenciaAdapter);
-        AsistenciasN(IDDoncente);
 
         //Mandar el Nombre de Usuario a la vista
         String usuario;
@@ -61,11 +60,11 @@ public class AsistenActivity extends AppCompatActivity implements View.OnClickLi
         //Configuracion de Parametros
         parametros = this.getIntent().getExtras();
         if(parametros != null){
-            IDDoncente = parametros.getInt("iddocente");
+            iddocente = parametros.getInt("iddocente");
         }
-        Log.e(TAG, String.valueOf(IDDoncente));
+        Log.e(TAG, String.valueOf(iddocente));
 
-        AsistenciasN(IDDoncente);
+        AsistenciasN(iddocente);
 
     }
 

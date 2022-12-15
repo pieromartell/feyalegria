@@ -18,8 +18,8 @@ import retrofit2.http.Path;
 public interface AndroidapiService {
 
     //Interface Get para el Horario_Card
-    @GET("vhorariodocente")
-    Call<List<Horarios>> obtenerListaHorarios();
+    @GET("horariodocente/{iddocente}")
+    Call<List<Horarios>> obtenerListaHorarios(@Path("iddocente") int iddocente);
 
     //Interface GET para el tardanza_card
     @GET("tardanza/{iddocente}")

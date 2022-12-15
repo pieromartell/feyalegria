@@ -122,5 +122,6 @@ public class JustifiTarActivity extends AppCompatActivity implements View.OnClic
     private void Enviar(){
         borrardatos();
         Toast.makeText(JustifiTarActivity.this,"Justificacion de Tardanza Enviada", Toast.LENGTH_SHORT).show();
+        iraMenus();
     }
 }

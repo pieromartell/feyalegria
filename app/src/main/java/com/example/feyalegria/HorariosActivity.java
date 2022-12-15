@@ -24,12 +24,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class HorariosActivity extends AppCompatActivity implements View.OnClickListener {
+    public int iddocente;
+    Bundle parametros;
     private static String TAG = "Horarios";
     private ActivityHorariosBinding binding;
     horarioAdapter adapter;
     LinearLayoutManager layoutManager;
     RecyclerView recyclerView;
-    Bundle parametros;
 
 
     List<Horarios> listahorarios = new ArrayList<>();
@@ -47,7 +48,6 @@ public class HorariosActivity extends AppCompatActivity implements View.OnClickL
         recyclerView.setLayoutManager(layoutManager);
         adapter =  new horarioAdapter(listahorarios);
         recyclerView.setAdapter(adapter);
-        fetchhorario();
 
         String usuario;
         parametros = this.getIntent().getExtras();
@@ -55,19 +55,30 @@ public class HorariosActivity extends AppCompatActivity implements View.OnClickL
             usuario = parametros.getString("usuario");
             binding.txtdocenteh.setText(usuario.toUpperCase());}
 
+        //Configuracion de Parametros
+        parametros = this.getIntent().getExtras();
+        if(parametros != null){
+            iddocente = parametros.getInt("iddocente");
+        }
+        cargarDatosHo(iddocente);
+
     }
-    //Metodo para Mostrar los Horarios
-    private void fetchhorario(){
-        RetrofitClient.getRetrofitCliente().obtenerListaHorarios().enqueue(new Callback<List<Horarios>>() {
+
+    private void cargarDatosHo(int iddocente) {
+        Call<List<Horarios>>call =  RetrofitClient.getRetrofitCliente().obtenerListaHorarios(iddocente);
+        call.enqueue(new Callback<List<Horarios>>() {
             @Override
             public void onResponse(Call<List<Horarios>> call, Response<List<Horarios>> response) {
-                if(response.isSuccessful() && response.body() != null){
-                    listahorarios.addAll(response.body());
-                    adapter.notifyDataSetChanged();
-                    Log.e(TAG," TODO BIEN : "+response.body());
-
-                }else{
-                    Log.e(TAG," OnResponse: "+response.body());
+                try{
+                    if(response.isSuccessful() && response.body() != null){
+                        listahorarios.addAll(response.body());
+                        adapter.notifyDataSetChanged();
+                        Log.e(TAG," TODO BIEN EN HORARIOS: "+response.body());
+                    }else{
+                        Log.e(TAG," HAY UN ERROR EN HORARIOS: "+response.body());
+                    }
+                }catch (Exception e){
+                    Log.e(TAG," TODOD MAL: "+response.body());
                 }
             }
 
@@ -77,6 +88,7 @@ public class HorariosActivity extends AppCompatActivity implements View.OnClickL
             }
         });
     }
+
 
 
     @Override

@@ -113,5 +113,6 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
     private void Enviar(){
         borrardatos();
         Toast.makeText(JustificacionActivity.this,"Justificacion de Inasistencia Enviada", Toast.LENGTH_SHORT).show();
+        iraMenus();
     }
 }

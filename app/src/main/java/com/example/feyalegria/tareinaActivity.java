@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.feyalegria.adapter.InasistenciaAdapter;
 import com.example.feyalegria.adapter.tardanzaAdapter;
+import com.example.feyalegria.databinding.ActivityJustifiTarBinding;
 import com.example.feyalegria.databinding.ActivityMainBinding;
 import com.example.feyalegria.databinding.ActivityTareinaBinding;
 import com.example.feyalegria.model.Inasistencia;
@@ -99,6 +100,9 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
                         listainasis.addAll(response.body());
                         Inasistenciaadapter.notifyDataSetChanged();
                         Log.e(TAGI, " TODO BIEN: "+ response.body());
+                        if(response.body() ==null){
+                            binding.txtmensaje.setText("NO HAY INASISTENCIAS, FELICIDADES");
+                        }
                     }else{
                         Log.e(TAGI, " TODO MAL: "+response.body());
                     }
@@ -122,11 +126,16 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onResponse(Call<List<Tardanza>> call, Response<List<Tardanza>> response) {
                 try {
-                    if(response.isSuccessful()){
+                    if(response.isSuccessful() && response.body() !=null){
                         listaTardanza.addAll(response.body());
                         tardanzaAdapter.notifyDataSetChanged();
                         Log.e(TAGT, " TODO BIEN: "+ response.body());
+                        if(recyclerView2.getHeight() ==0){
+                            binding.txtmensaje2.setText("NO HAY TARDANZA, FELICIDADES");
+                            Toast.makeText(tareinaActivity.this, "No hay Inasistencias", Toast.LENGTH_SHORT).show();
+                        }
                     }else{
+
                         Log.e(TAGT, " TODO MAL: "+response.body());
                     }
                 }catch (Exception e){

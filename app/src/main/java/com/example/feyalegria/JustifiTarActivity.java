@@ -28,6 +28,7 @@ import retrofit2.Response;
 
 public class JustifiTarActivity extends AppCompatActivity implements View.OnClickListener  {
 
+    Bundle parametros;
     ActivityJustifiTarBinding binding;
     Spinner spinner;
     private String TAG = "Justificar Tardanza";
@@ -50,8 +51,13 @@ public class JustifiTarActivity extends AppCompatActivity implements View.OnClic
         spinner = binding.spFechaFalta;
         adapter =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listtardan);
         androidapiService = RetrofitparaSpinners.getConnection().create(AndroidapiService.class);
-        cargaData();
+        //cargaData();
+        String nom;
+        parametros = this.getIntent().getExtras();
+        if(parametros != null) {
+            nom = parametros.getString("usuario");
     }
+    /*
     //Metodo para Cargar los Datos con tardanza
     public void cargaData(){
         Call<List<Tardanza>> call = androidapiService.obtenerListaTardanza();
@@ -77,7 +83,7 @@ public class JustifiTarActivity extends AppCompatActivity implements View.OnClic
                 Toast.makeText(JustifiTarActivity.this, "Error: ", Toast.LENGTH_SHORT).show();
             }
         });
-
+*/
     }
 
 
@@ -98,6 +104,7 @@ public class JustifiTarActivity extends AppCompatActivity implements View.OnClic
 
     private void iraMenus(){
         Intent intentMenus = new Intent(this,MenuActivity.class);
+        intentMenus.putExtras(parametros);
         startActivity(intentMenus);
     }
 }

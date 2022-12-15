@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,7 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
 
     //Parametro para pasar el nombre de los usuarios
     Bundle parametros;
+    public int IDDoncente;
 
     private static String TAGI ="INASISTENCIA";
     private static String TAGT ="TARDANZA";
@@ -62,7 +64,6 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
         recyclerView2.setLayoutManager(layoutManager);
         tardanzaAdapter = new tardanzaAdapter(listaTardanza);
         recyclerView2.setAdapter(tardanzaAdapter);
-        fechtTardanza();
 
         //Configuracion del RecyclerView INASISTENCIA
         recyclerView = binding.rvinasistencia;
@@ -70,7 +71,6 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
         recyclerView.setLayoutManager(layoutManager);
         Inasistenciaadapter = new InasistenciaAdapter(listainasis);
         recyclerView.setAdapter(Inasistenciaadapter);
-        FetchInasisten();
 
         //Mandar el Nombre de Usuario a la vista
         String usuario;
@@ -79,51 +79,72 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
             usuario = parametros.getString("usuario");
             binding.txtdocente.setText(usuario.toUpperCase());}
 
+        //Configuracion de Parametros
+        parametros = this.getIntent().getExtras();
+        if(parametros != null){
+            IDDoncente = parametros.getInt("iddocente");
+        }
+        Tardanza(IDDoncente);
+        InasistenciaMETODO(IDDoncente);
+
     }
 
-    //Metodo para Enviar las Tardanzas
-    private void fechtTardanza() {
-        RetrofitClient.getRetrofitCliente().obtenerListaTardanza().enqueue(new Callback<List<Tardanza>>() {
+    private void InasistenciaMETODO(int iddocente) {
+        Call<List<Inasistencia>> call = RetrofitClient.getRetrofitCliente().obtenerListaInasistencia(iddocente);
+        call.enqueue(new Callback<List<Inasistencia>>() {
+            @Override
+            public void onResponse(Call<List<Inasistencia>> call, Response<List<Inasistencia>> response) {
+                try{
+                    if(response.isSuccessful()){
+                        listainasis.addAll(response.body());
+                        Inasistenciaadapter.notifyDataSetChanged();
+                        Log.e(TAGI, " TODO BIEN: "+ response.body());
+                    }else{
+                        Log.e(TAGI, " TODO MAL: "+response.body());
+                    }
+
+                }catch (Exception e){
+                    Log.e(TAGI, " TODO MAL: "+ response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Inasistencia>> call, Throwable t) {
+                Toast.makeText(tareinaActivity.this, "MALISIMO EN INASISTENCIA", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void Tardanza(int iddocente){
+        Call<List<Tardanza>> call =  RetrofitClient.getRetrofitCliente().obtenerListaTardanza(iddocente);
+        call.enqueue(new Callback<List<Tardanza>>() {
             @Override
             public void onResponse(Call<List<Tardanza>> call, Response<List<Tardanza>> response) {
-                if(response.isSuccessful() && response.body() !=null){
-                    listaTardanza.addAll(response.body());
-                    tardanzaAdapter.notifyDataSetChanged();
-                    Log.e(TAGT," TDOD BIEN EN TARDANZA: "+response.body());
-                }else{
-                    Log.e(TAGT," OnResponse: "+response.body());
+                try {
+                    if(response.isSuccessful()){
+                        listaTardanza.addAll(response.body());
+                        tardanzaAdapter.notifyDataSetChanged();
+                        Log.e(TAGT, " TODO BIEN: "+ response.body());
+                    }else{
+                        Log.e(TAGT, " TODO MAL: "+response.body());
+                    }
+                }catch (Exception e){
+                    Log.e(TAGT, " TODO MAL: "+ response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Tardanza>> call, Throwable t) {
-                Toast.makeText(tareinaActivity.this, "Error: " +t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(tareinaActivity.this, "MALISMO DE TARDANZA", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
-    //Metodo Para Enviar Las Inasistencias
-    private void FetchInasisten(){
-        RetrofitClient.getRetrofitCliente().obtenerListaInasistencia().enqueue(new Callback<List<Inasistencia>>() {
-            @Override
-            public void onResponse(Call<List<Inasistencia>> call, Response<List<Inasistencia>> response) {
-                if(response.isSuccessful() && response.body() !=null){
-                    listainasis.addAll(response.body());
-                    Inasistenciaadapter.notifyDataSetChanged();
-                    Log.e(TAGI," TDOD BIEN EN INASISTENCIA: "+response.body());
-                }else{
-                    Log.e(TAGI,"OnResponse: "+response.body());
-                }
 
-            }
 
-            @Override
-            public void onFailure(Call<List<Inasistencia>> call, Throwable t) {
-                Toast.makeText(tareinaActivity.this, "Error: " +t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+
 
     @Override
     public void onClick(View view) {
@@ -139,6 +160,7 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
     public void irjustificacontar(){
         Intent intentjustificaciontar = new Intent(this,JustifiTarActivity.class);
         intentjustificaciontar.putExtra("info","Tardanza");
+        intentjustificaciontar.putExtras(parametros);
         startActivity(intentjustificaciontar);
 
     }
@@ -146,6 +168,7 @@ public class tareinaActivity extends AppCompatActivity implements View.OnClickLi
     public void irjustificaconIna(){
         Intent intentjustificacionina = new Intent(this,JustificacionActivity.class);
         intentjustificacionina.putExtra("info2","Inasistencia");
+        intentjustificacionina.putExtras(parametros);
         startActivity(intentjustificacionina);
     }
     private void iraMenu(){

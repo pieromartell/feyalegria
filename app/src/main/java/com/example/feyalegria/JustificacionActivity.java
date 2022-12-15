@@ -35,6 +35,7 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
         binding = ActivityJustificacionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.btnMenu2.setOnClickListener(this);
+        binding.btnEnviar.setOnClickListener(this);
         Bundle bundle = getIntent().getExtras();
         String dato2 = bundle.getString("info2");
         binding.tvtipofalta2.setText(dato2);
@@ -42,12 +43,13 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
         spinner = binding.spFechaFalta;
         adapter =  new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,listtardan);
         androidapiService = RetrofitparaSpinners.getConnection().create(AndroidapiService.class);
-        cargardatosINA();
+        //cargardatosINA();
 
 
 
     }
 
+    /*
     private void cargardatosINA() {
         Call<List<Inasistencia>> call =  androidapiService.obtenerListaInasistencia();
         call.enqueue(new Callback<List<Inasistencia>>() {
@@ -73,11 +75,15 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
         });
     }
 
+     */
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnMenu2: iraMenus();
                 break;
+            case R.id.btnEnviar: Enviar();
+            break;
         }
 
     }
@@ -89,5 +95,9 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
     private void iraMenus(){
         Intent intentMenus = new Intent(this,MenuActivity.class);
         startActivity(intentMenus);
+    }
+    private void Enviar(){
+        borrardatos();
+        Toast.makeText(JustificacionActivity.this,"Justificacion Enviada", Toast.LENGTH_SHORT).show();
     }
 }

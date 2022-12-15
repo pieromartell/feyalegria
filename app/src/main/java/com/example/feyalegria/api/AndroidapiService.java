@@ -22,12 +22,12 @@ public interface AndroidapiService {
     Call<List<Horarios>> obtenerListaHorarios();
 
     //Interface GET para el tardanza_card
-    @GET("vtardanza")
-    Call<List<Tardanza>> obtenerListaTardanza();
+    @GET("tardanza/{iddocente}")
+    Call<List<Tardanza>> obtenerListaTardanza(@Path("iddocente") int iddocente);
 
     //Interface GET para el inasistencia_card
-    @GET("vinasistencia")
-    Call<List<Inasistencia>> obtenerListaInasistencia();
+    @GET("inasistencia/{iddocente}")
+    Call<List<Inasistencia>> obtenerListaInasistencia(@Path("iddocente") int iddocente);
 
     //Interface GET para el Item_Lista
     //Interface GET para el Item_Lista

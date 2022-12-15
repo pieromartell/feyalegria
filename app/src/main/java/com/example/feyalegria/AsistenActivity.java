@@ -28,6 +28,7 @@ public class AsistenActivity extends AppCompatActivity implements View.OnClickLi
 
     //Parametro para pasar el nombre de los usuarios
     Bundle parametros;
+    public int IDDoncente;
 
     //Elemento necesario para obtener la asistencia
     private static String TAG = "ASISTENCIA";
@@ -48,7 +49,7 @@ public class AsistenActivity extends AppCompatActivity implements View.OnClickLi
         recyclerView.setLayoutManager(layoutManager);
         asistenciaAdapter =  new asistenciaAdapter(listaasistencia);
         recyclerView.setAdapter(asistenciaAdapter);
-        fechtAsistencia();
+        AsistenciasN(IDDoncente);
 
         //Mandar el Nombre de Usuario a la vista
         String usuario;
@@ -57,29 +58,45 @@ public class AsistenActivity extends AppCompatActivity implements View.OnClickLi
             usuario = parametros.getString("usuario");
             binding.txtdocenteh.setText(usuario.toUpperCase());}
 
+        //Configuracion de Parametros
+        parametros = this.getIntent().getExtras();
+        if(parametros != null){
+            IDDoncente = parametros.getInt("iddocente");
+        }
+        Log.e(TAG, String.valueOf(IDDoncente));
+
+        AsistenciasN(IDDoncente);
+
     }
 
-    //Metodo para devolver la Asistencia
-    private void fechtAsistencia() {
-        RetrofitClient.getRetrofitCliente().obtnerListarAsistencia().enqueue(new Callback<List<asistencia>>() {
+    private void AsistenciasN(int iddocente) {
+        Call<List<asistencia>> call = RetrofitClient.getRetrofitCliente().obtnerListarAsistencia(iddocente);
+        call.enqueue(new Callback<List<asistencia>>() {
             @Override
             public void onResponse(Call<List<asistencia>> call, Response<List<asistencia>> response) {
-                if(response.isSuccessful() && response.body() !=null){
-                    listaasistencia.addAll(response.body());
-                    asistenciaAdapter.notifyDataSetChanged();
-                    Log.e(TAG," TODO BIEN: "+response.body());
-                }else{
-                    Log.e(TAG," OnResponse: " + response.body());
+                try {
+                    if (response.isSuccessful()){
+                        listaasistencia.addAll(response.body());
+                        asistenciaAdapter.notifyDataSetChanged();
+                        Log.e(TAG," TODO BIEN: " + response.body());
+
+                    }else{
+                        Log.e(TAG," TODO MAL: " + response.body());
+                    }
+
+                }catch (Exception e){
+                    Toast.makeText(AsistenActivity.this,"Mensaje de Asistencia:"+ e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<asistencia>> call, Throwable t) {
-                Toast.makeText(AsistenActivity.this, "Error: ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AsistenActivity.this,"MALISIMO:", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
+
+
 
     @Override
     public void onClick(View view) {

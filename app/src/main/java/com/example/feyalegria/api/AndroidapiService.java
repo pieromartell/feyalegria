@@ -13,6 +13,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface AndroidapiService {
 
@@ -29,8 +30,9 @@ public interface AndroidapiService {
     Call<List<Inasistencia>> obtenerListaInasistencia();
 
     //Interface GET para el Item_Lista
-    @GET("vasistencia")
-    Call<List<asistencia>> obtnerListarAsistencia();
+    //Interface GET para el Item_Lista
+    @GET("asistencia/{iddocente}")
+    Call<List<asistencia>> obtnerListarAsistencia(@Path("iddocente") int iddocente);
 
     @POST("login")
     public Call<ResponseLogin> login(@Body RequestLogin requestLogin);

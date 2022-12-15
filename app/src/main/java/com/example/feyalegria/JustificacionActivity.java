@@ -76,7 +76,7 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
                     adapter.notifyDataSetChanged();
                     Log.e(TAG,"  TODO BIEN "+ response.body());
                 }else{
-                    
+
                     Log.e(TAG, " OnResponse "+response.body());
                 }
             }
@@ -112,6 +112,6 @@ public class JustificacionActivity extends AppCompatActivity implements View.OnC
     }
     private void Enviar(){
         borrardatos();
-        Toast.makeText(JustificacionActivity.this,"Justificacion Enviada", Toast.LENGTH_SHORT).show();
+        Toast.makeText(JustificacionActivity.this,"Justificacion de Inasistencia Enviada", Toast.LENGTH_SHORT).show();
     }
 }

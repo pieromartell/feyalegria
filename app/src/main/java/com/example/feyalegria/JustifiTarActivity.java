@@ -44,6 +44,7 @@ public class JustifiTarActivity extends AppCompatActivity implements View.OnClic
         setContentView(binding.getRoot());
         //Configuracion de los Botones
         binding.btnMenu2.setOnClickListener(this);
+        binding.btnEnviar.setOnClickListener(this);
         Bundle bundle = getIntent().getExtras();
         String dato = bundle.getString("info");
         binding.tvTipoFalta.setText(dato);
@@ -104,6 +105,7 @@ public class JustifiTarActivity extends AppCompatActivity implements View.OnClic
         switch (view.getId()) {
             case R.id.btnMenu2: iraMenus();
                 break;
+            case R.id.btnEnviar:Enviar();
         }
 
     }
@@ -116,5 +118,9 @@ public class JustifiTarActivity extends AppCompatActivity implements View.OnClic
         Intent intentMenus = new Intent(this,MenuActivity.class);
         intentMenus.putExtras(parametros);
         startActivity(intentMenus);
+    }
+    private void Enviar(){
+        borrardatos();
+        Toast.makeText(JustifiTarActivity.this,"Justificacion de Tardanza Enviada", Toast.LENGTH_SHORT).show();
     }
 }

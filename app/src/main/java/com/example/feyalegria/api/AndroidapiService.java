@@ -2,6 +2,7 @@ package com.example.feyalegria.api;
 
 import com.example.feyalegria.model.Horarios;
 import com.example.feyalegria.model.Inasistencia;
+import com.example.feyalegria.model.RequestAsistencia;
 import com.example.feyalegria.model.RequestLogin;
 import com.example.feyalegria.model.ResponseLogin;
 import com.example.feyalegria.model.Tardanza;
@@ -36,4 +37,7 @@ public interface AndroidapiService {
 
     @POST("login")
     public Call<ResponseLogin> login(@Body RequestLogin requestLogin);
+
+    @POST("marcarasistencia")
+    public Call<RequestAsistencia> MarcarAsistencia(@Body RequestAsistencia requestAsistencia);
 }
